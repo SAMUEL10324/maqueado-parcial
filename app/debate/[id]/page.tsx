@@ -9,6 +9,17 @@ interface DebatePageProps {
   }>
 }
 
+// ---------------------------------------------------------
+// ESTA ES LA FUNCIÓN NUEVA QUE RESUELVE EL ERROR 404/FAIL
+// Toma todos los debates de prueba y le dice a Netlify 
+// que genere una página estática para cada ID.
+export function generateStaticParams() {
+  return mockDebates.map((debate) => ({
+    id: String(debate.id),
+  }))
+}
+// ---------------------------------------------------------
+
 export async function generateMetadata({ params }: DebatePageProps): Promise<Metadata> {
   const { id } = await params
   const debate = mockDebates.find(d => d.id === id)
